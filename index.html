@@ -1,1 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VioletMart — E-commerce Prototype</title>
+  <meta name="description" content="VioletMart - protótipo e-commerce minimalista" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand" id="brand">
+      <!-- SVG logo: símbolo geométrico simples + texto -->
+      <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden>
+        <rect x="10" y="10" width="80" height="80" rx="18" fill="#5B2C82"></rect>
+        <path d="M30 35 L70 35 L50 70 Z" fill="#EAD8FF"></path>
+      </svg>
+      <div>
+        <strong>VioletMart</strong>
+        <small>tech • confiança • simplicidade</small>
+      </div>
+    </div>
 
+    <div class="search">
+      <input id="searchInput" placeholder="Buscar produtos, marcas ou categorias..." />
+      <button id="searchBtn">Buscar</button>
+    </div>
+
+    <nav class="top-actions">
+      <button id="favoritesBtn" title="Favoritos">❤</button>
+      <button id="cartBtn" title="Carrinho">🛒 <span id="cartCount">0</span></button>
+      <div class="user-area" id="userArea">
+        <button id="loginBtn">Entrar</button>
+      </div>
+      <button id="menuBtn" class="menu-toggle">☰</button>
+    </nav>
+  </header>
+
+  <!-- SIDE MOBILE MENU -->
+  <aside class="side-menu" id="sideMenu" aria-hidden="true">
+    <button class="close" id="closeMenu">✕</button>
+    <ul>
+      <li><a href="#" data-view="home">Início</a></li>
+      <li><a href="#" data-view="categories">Categorias</a></li>
+      <li><a href="#" data-view="favorites">Favoritos</a></li>
+      <li><a href="#" data-view="orders">Pedidos</a></li>
+      <li><a href="#" id="openAdmin">Admin</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN APP -->
+  <main id="app">
+    <!-- HOME view -->
+    <section id="homeView" class="view active">
+      <div class="banner-rotator" id="bannerRotator">
+        <!-- banners dinamicos -->
+      </div>
+
+      <section class="categories" id="categoriesRow">
+        <!-- categorias -->
+      </section>
+
+      <section class="offers">
+        <h2>Ofertas</h2>
+        <div id="offersList" class="product-grid"></div>
+      </section>
+
+      <section class="products-section">
+        <h2>Produtos</h2>
+        <div class="filters">
+          <select id="filterCategory"><option value="">Todas as categorias</option></select>
+          <select id="sortSelect">
+            <option value="popular">Mais populares</option>
+            <option value="price_asc">Preço: menor → maior</option>
+            <option value="price_desc">Preço: maior → menor</option>
+          </select>
+        </div>
+        <div id="productList" class="product-grid"></div>
+        <div id="loadingProducts" class="loading">Carregando produtos...</div>
+      </section>
+    </section>
+
+    <!-- PRODUCT view -->
+    <section id="productView" class="view">
+      <button class="back" data-back="home">← Voltar</button>
+      <div class="product-detail" id="productDetail">
+        <!-- preenchido por JS -->
+      </div>
+    </section>
+
+    <!-- CART view -->
+    <section id="cartView" class="view">
+      <h2>Carrinho</h2>
+      <div id="cartContainer"></div>
+    </section>
+
+    <!-- LOGIN / REGISTER modal -->
+    <div class="modal" id="authModal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" id="authClose">✕</button>
+        <div id="authForms">
+          <form id="loginForm">
+            <h3>Entrar</h3>
+            <input type="email" id="loginEmail" placeholder="E-mail" required />
+            <input type="password" id="loginPassword" placeholder="Senha" required />
+            <button type="submit">Entrar</button>
+            <p>Não tem conta? <a href="#" id="showRegister">Crie uma</a></p>
+          </form>
+
+          <form id="registerForm" class="hidden">
+            <h3>Criar Conta</h3>
+            <input type="text" id="regName" placeholder="Nome completo" required />
+            <input type="email" id="regEmail" placeholder="E-mail" required />
+            <input type="password" id="regPassword" placeholder="Senha" required />
+            <button type="submit">Cadastrar</button>
+            <p>Já tem conta? <a href="#" id="showLogin">Entre</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN view -->
+    <section id="adminView" class="view">
+      <h2>Admin Dashboard</h2>
+      <div class="admin-grid">
+        <aside class="admin-sidebar">
+          <button data-admin="products">Produtos</button>
+          <button data-admin="categories">Categorias</button>
+          <button data-admin="banners">Banners</button>
+          <button data-admin="orders">Pedidos</button>
+        </aside>
+
+        <div class="admin-main" id="adminMain">
+          <!-- forms e tabelas admin -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDERS / PROFILE / FAVORITES minimal placeholders -->
+    <section id="ordersView" class="view"><h2>Pedidos</h2><div id="ordersList"></div></section>
+    <section id="favoritesView" class="view"><h2>Favoritos</h2><div id="favoritesList"></div></section>
+    <section id="profileView" class="view"><h2>Perfil</h2><div id="profileBox"></div></section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>
+      <strong>VioletMart</strong>
+      <p>© <span id="year"></span> — Minimal e-commerce prototype</p>
+    </div>
+    <div class="palette">
+      <div class="swatch" title="#5B2C82" style="background:#5B2C82"></div>
+      <div class="swatch" title="#8E58C9" style="background:#8E58C9"></div>
+      <div class="swatch" title="#EAD8FF" style="background:#EAD8FF"></div>
+      <div class="swatch" title="#222326" style="background:#222326"></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
